@@ -496,7 +496,7 @@ public class Discotienda
     }
     
     // -----------------------------------------------------------------
-    // Trabajo 
+    // Trabajo (David Noguera y Samuel Bolaños)
     // -----------------------------------------------------------------
 
     /**
@@ -568,15 +568,15 @@ public class Discotienda
     		
     		if (miDisco.darPrecioDisco() <= 1000 && (miDisco.darGenero().equals("Rock") || miDisco.darGenero().equals("Pop") )   ) {
     			
-    		// Escribir con la pluma la informacion requerida
+    		// Escribir con la pluma la informacion requerida, en caso de presentarse una condicion pero no la otra else if
         	pluma.println( " Nombre: " + miDisco.darNombreDisco()+
         				   " Artista: " + miDisco.darArtista()+
         				   " Genero: " + miDisco.darGenero()  );
         	
-    		} else if (miDisco.darGenero().equals("rock") && !miDisco.darGenero().equals("pop")) {
+    		} else if (miDisco.darPrecioDisco() <= 1000 && (miDisco.darGenero().equals("Rock") && !miDisco.darGenero().equals("Pop"))) {
                 pluma.println("Se encontraron discos economicos de rock pero no pop");
                 
-            } else if (miDisco.darGenero().equals("pop") && !miDisco.darGenero().equals("rock")) {
+            } else if (miDisco.darPrecioDisco() <= 1000 && (miDisco.darGenero().equals("Pop") && !miDisco.darGenero().equals("Rock"))) {
                 pluma.println("Se encontraron discos economicos de pop pero no rock");
                 
             } else {
