@@ -573,10 +573,10 @@ public class Discotienda
         				   " Artista: " + miDisco.darArtista()+
         				   " Genero: " + miDisco.darGenero()  );
         	
-    		} else if (miDisco.darPrecioDisco() <= 1000 && miDisco.darGenero().equals("Pop")) {
+    		} else if (miDisco.darPrecioDisco() <= 1000 && (!miDisco.darGenero().equals("Rock") && miDisco.darGenero().equals("Pop") )   ) {
         	    pluma.println("Se encontraron discos económicos de Pop pero no rock");
 
-        	} else if (miDisco.darPrecioDisco() <= 1000 &&  miDisco.darGenero().equals("Rock")) {
+        	} else if (miDisco.darPrecioDisco() <= 1000 &&  ((miDisco.darGenero().equals("Rock") &&  !miDisco.darGenero().equals("Pop")))) {
         	    pluma.println("Se encontraron discos económicos de Rock pero no Pop");
 
         	} else if (miDisco.darPrecioDisco() >= 1000 && !miDisco.darGenero().equals("Pop") && !miDisco.darGenero().equals("Rock")){
