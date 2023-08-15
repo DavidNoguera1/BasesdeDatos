@@ -541,7 +541,8 @@ public class Discotienda
     /**
      * Generar un informe de todos los discos de un género ROCK y POP y que además sean económicos
      * es decir que el precio total NO supere los (1000) mil pesos. El informe debe tener todos los datos de los discos.
-     * @throws FileNotFoundException - Cuando no existe una ruta especifica del archivo al leer o escribir
+     * @throws DiscoException - Cuando no existen discos que cumplan las condiciones requeridad (No genera arhcivo) Att: DNoguera
+     * En este caso discosCostos.txt existe porque se realizaron test anteriormente a la etrada del "super" Att: Bolaños
      */
     
     public class DiscoException extends Exception {
@@ -579,6 +580,7 @@ public class Discotienda
                     discosExistentes = true;
                 } 
                 
+                // Estos son mensajes adicionales que se enviaran si es que se cumple la anterior condicion (No funcionan adecuadamente excepto por el ultimo else)
                 else if (miDisco.darPrecioDisco() <= 1000 && (!miDisco.darGenero().equals("Rock") && miDisco.darGenero().equals("Pop") )   ) {
             	    pluma.println("Se encontraron discos económicos de Pop pero no rock");
 
@@ -592,9 +594,9 @@ public class Discotienda
 
             }
 
-            // Si no se encontraron discos, lanzar excepción
+            // Si no se encuentran los discos entonces se lanza una excepcion
             if (!discosExistentes) {
-                throw new DiscoException("No se encontraron discos con las condiciones dadas");
+                throw new DiscoException(" (No se generara un informe) ");
             }
         } catch (FileNotFoundException e) {
             System.out.println("Error al crear el archivo: " + e.getMessage());
