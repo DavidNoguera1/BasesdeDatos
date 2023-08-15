@@ -568,7 +568,9 @@ public class Discotienda
     		
     		if (miDisco.darPrecioDisco() <= 1000 && (miDisco.darGenero().equals("Rock") || miDisco.darGenero().equals("Pop") )   ) {
     			
-    		// Escribir con la pluma la informacion requerida, en caso de presentarse una condicion pero no la otra else if
+    		// Escribir con la pluma la informacion requerida, en caso de presentarse una condicion pero no la otra  se ejecuta else if
+    		// Profe no funcionan los else if :( 
+    			
         	pluma.println( " Nombre: " + miDisco.darNombreDisco()+
         				   " Artista: " + miDisco.darArtista()+
         				   " Genero: " + miDisco.darGenero()  );
