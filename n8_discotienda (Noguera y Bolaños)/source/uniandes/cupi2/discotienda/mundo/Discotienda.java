@@ -596,11 +596,12 @@ public class Discotienda
 
             // Si no se encuentran los discos entonces se lanza una excepcion
             if (!discosExistentes) {
-            	archivo.delete();
+            	
                 throw new DiscoException(" (No se generara un informe) ");
                 
             }
         } catch (FileNotFoundException e) {
+        	
             System.out.println("Error al crear el archivo: " + e.getMessage());
         } finally {
             if (pluma != null) {
@@ -633,7 +634,10 @@ public class Discotienda
             generarInformeDiscosEconomicos();
             return "Reporte generado satisfactoriamente";
         } catch (DiscoException e) {
-        	
+        	File archivo = new File("./data/discosCostosos.txt");
+            if (archivo.exists()) {
+                archivo.delete(); // Elimina el archivo si se lanza la excepción
+            }
             return "No se encontraron discos con las condiciones dadas" + e.getMessage();
             
         }
