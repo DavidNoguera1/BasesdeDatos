@@ -550,65 +550,49 @@ public class Discotienda
         }
     }
     
-    public void generarInformeDiscosEconomicos () throws DiscoException {
-    	
-    	//Crear archivo de clase FILE
-    	File archivo = new File ("./data/discosCostosos.txt") ;
-    	
-    	// Crear pluma para escribir el archivo 
-    	PrintWriter pluma = null;
-    	
-    	 try {
-    	        pluma = new PrintWriter(archivo);
+    public void generarInformeDiscosEconomicos() throws DiscoException {
+        //Crear archivo de clase FILE
+        File archivo = new File("./data/discosCostosos.txt");
 
-    	        // Escribir con la pluma en el archivo
-    	        pluma.println("Reporte de discos económicos rock y pop");
-    	        pluma.println("=================");
+        // Crear pluma para escribir el archivo 
+        PrintWriter pluma = null;
 
-    	        // Recorrido total sobre discos
-    	        boolean discosExistentes = false;
-    	        for (int i = 0; i < discos.size(); i++) {
-    	            // Extraer información de cada disco
-    	            Disco miDisco = (Disco) discos.get(i);
+        try {
+            pluma = new PrintWriter(archivo);
 
-    	            if (miDisco.darPrecioDisco() <= 1000 && (miDisco.darGenero().equals("Rock") || miDisco.darGenero().equals("Pop"))) {
-    	                // Escribir con la pluma la información requerida
-    	                pluma.println("Nombre: " + miDisco.darNombreDisco() +
-    	                        " Artista: " + miDisco.darArtista() +
-    	                        " Genero: " + miDisco.darGenero());
+            // Escribir con la pluma en el archivo
+            pluma.println("Reporte de discos económicos rock y pop");
+            pluma.println("=================");
 
-    	                discosExistentes = true;
-    	            
-    	            
-    	        } else if (miDisco.darPrecioDisco() <= 1000 && (!miDisco.darGenero().equals("Rock") && miDisco.darGenero().equals("Pop") )   ) {
-            	    pluma.println("Se encontraron discos económicos de Pop pero no rock");
-            	    discosExistentes = true;
+            // Recorrido total sobre discos
+            boolean discosExistentes = false;
+            for (int i = 0; i < discos.size(); i++) {
+                // Extraer información de cada disco
+                Disco miDisco = (Disco) discos.get(i);
 
-            	} else if (miDisco.darPrecioDisco() <= 1000 &&  ((miDisco.darGenero().equals("Rock") &&  !miDisco.darGenero().equals("Pop")))) {
-            	    pluma.println("Se encontraron discos económicos de Rock pero no Pop");
-            	    discosExistentes = true;
+                if (miDisco.darPrecioDisco() <= 1000 && (miDisco.darGenero().equals("Rock") || miDisco.darGenero().equals("Pop"))) {
+                    // Escribir con la pluma la información requerida
+                    pluma.println("Nombre: " + miDisco.darNombreDisco() +
+                            " Artista: " + miDisco.darArtista() +
+                            " Genero: " + miDisco.darGenero());
 
-            	} else if (miDisco.darPrecioDisco() >= 1000 && !miDisco.darGenero().equals("Pop") && !miDisco.darGenero().equals("Rock")){
-            	    pluma.println("No se encontraron mas discos con las características solicitadas");
-            	    
-            	    
+                    discosExistentes = true;
+                }
+            }
 
-            	} 
-    	            
-    	         // Cerrar pluma antes de la verificación para que la excepcion no represente un problema a futuro
-    	            pluma.close();
+            // Si no se encontraron discos, lanzar excepción
+            if (!discosExistentes) {
+                throw new DiscoException("No se encontraron discos con las condiciones dadas");
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Error al crear el archivo: " + e.getMessage());
+        } finally {
+            if (pluma != null) {
+                pluma.close();
+            }
+        }
+    }
 
-
-    	        // Si no hay discos que cumplan las condiciones no hay necesidad de crear un archivo
-    	        // En este archivo ya existe "dicosCostos.txt" debido a que se realizaron test anteriores por favor entender.
-    	        if (!discosExistentes) {
-    	                throw new DiscoException("(No se generara un reporte)");
-    	            	}
-    	        	}  
-    	        } catch (FileNotFoundException e) {
-    	            System.out.println("Error al crear el archivo: " + e.getMessage());
-    	        }
-    	    }
     /**
      * Es el punto de extensi�n 1
      * @return respuesta 1
