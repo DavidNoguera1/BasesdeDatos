@@ -594,7 +594,7 @@ public class Discotienda
 
             }
 
-            // Si no se encuentran los discos entonces se lanza una excepcion
+            // Si no se encuentran los discos entonces se lanza una excepcion (Noguera)
             if (!discosExistentes) {
             	
                 throw new DiscoException(" (No se generara un informe) ");
