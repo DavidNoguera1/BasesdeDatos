@@ -544,59 +544,73 @@ public class Discotienda
      * @throws FileNotFoundException - Cuando no existe una ruta especifica del archivo al leer o escribir
      */
     
-    public void generarInformeDiscosEconomicos () throws FileNotFoundException {
+    public class DiscoException extends Exception {
+        public DiscoException(String message) {
+            super(message);
+        }
+    }
+    
+    public void generarInformeDiscosEconomicos () throws DiscoException {
     	
     	//Crear archivo de clase FILE
     	File archivo = new File ("./data/discosCostosos.txt") ;
     	
     	// Crear pluma para escribir el archivo 
-    	PrintWriter pluma = new PrintWriter(archivo);
+    	PrintWriter pluma = null;
     	
-    	// Escribir con la pluma en el archivo
-    	pluma.println("Reporte de discos economicos rock y pop");
-    	pluma.println("=================");
-    	
-    	// Escribir un reporte de discos economicos.
-    	//==========================================
-    	
-    	// Recorrido total sobre discos
-    	for (int i = 0; i < discos.size(); i++) {
-			
-    		
-    		// Extrar informacion de cada discos
-    		Disco miDisco = (Disco)discos.get(i);
-    		
-    		if (miDisco.darPrecioDisco() <= 1000 && (miDisco.darGenero().equals("Rock") || miDisco.darGenero().equals("Pop") )   ) {
-    			
-    		// Escribir con la pluma la informacion requerida, en caso de presentarse una condicion pero no la otra  se ejecuta else if
-    		// Profe no funcionan los else if :( 
-    			
-        	pluma.println( " Nombre: " + miDisco.darNombreDisco()+
-        				   " Artista: " + miDisco.darArtista()+
-        				   " Genero: " + miDisco.darGenero()  );
-        	
-    		} else if (miDisco.darPrecioDisco() <= 1000 && (!miDisco.darGenero().equals("Rock") && miDisco.darGenero().equals("Pop") )   ) {
-        	    pluma.println("Se encontraron discos económicos de Pop pero no rock");
+    	 try {
+    	        pluma = new PrintWriter(archivo);
 
-        	} else if (miDisco.darPrecioDisco() <= 1000 &&  ((miDisco.darGenero().equals("Rock") &&  !miDisco.darGenero().equals("Pop")))) {
-        	    pluma.println("Se encontraron discos económicos de Rock pero no Pop");
+    	        // Escribir con la pluma en el archivo
+    	        pluma.println("Reporte de discos económicos rock y pop");
+    	        pluma.println("=================");
 
-        	} else if (miDisco.darPrecioDisco() >= 1000 && !miDisco.darGenero().equals("Pop") && !miDisco.darGenero().equals("Rock")){
-        	    pluma.println("No se encontraron mas discos con las características solicitadas");
+    	        // Recorrido total sobre discos
+    	        boolean discosExistentes = false;
+    	        for (int i = 0; i < discos.size(); i++) {
+    	            // Extraer información de cada disco
+    	            Disco miDisco = (Disco) discos.get(i);
 
-        	}
+    	            if (miDisco.darPrecioDisco() <= 1000 && (miDisco.darGenero().equals("Rock") || miDisco.darGenero().equals("Pop"))) {
+    	                // Escribir con la pluma la información requerida
+    	                pluma.println("Nombre: " + miDisco.darNombreDisco() +
+    	                        " Artista: " + miDisco.darArtista() +
+    	                        " Genero: " + miDisco.darGenero());
 
-		}
-    	
-    	// Cerrar pluma
-    	pluma.close();
+    	                discosExistentes = true;
+    	            
+    	            
+    	        } else if (miDisco.darPrecioDisco() <= 1000 && (!miDisco.darGenero().equals("Rock") && miDisco.darGenero().equals("Pop") )   ) {
+            	    pluma.println("Se encontraron discos económicos de Pop pero no rock");
+            	    discosExistentes = true;
 
-    }
-    	
-    	
+            	} else if (miDisco.darPrecioDisco() <= 1000 &&  ((miDisco.darGenero().equals("Rock") &&  !miDisco.darGenero().equals("Pop")))) {
+            	    pluma.println("Se encontraron discos económicos de Rock pero no Pop");
+            	    discosExistentes = true;
+
+            	} else if (miDisco.darPrecioDisco() >= 1000 && !miDisco.darGenero().equals("Pop") && !miDisco.darGenero().equals("Rock")){
+            	    pluma.println("No se encontraron mas discos con las características solicitadas");
+            	    discosExistentes = true;
+            	    
+
+            	} 
+
+
+    	        // Si no se encontraron discos, lanzar excepción
+    	        if (!discosExistentes) {
+    	            throw new DiscoException("No se encontraron discos con las condiciones dadas");
+    	        }
+    	    }
+    	        } catch (FileNotFoundException e) {
+    	        System.out.println("Error al crear el archivo: " + e.getMessage());
+    	    } finally {
+    	        if (pluma != null) {
+    	            pluma.close();
+    	        }
+    	    }
+    	}
     
-    
-    
+    	 
     
     /**
      * Es el punto de extensi�n 1
@@ -618,12 +632,12 @@ public class Discotienda
      */
     public String metodo2( )
     {
-    	try {
-			generarInformeDiscosEconomicos();
-			return ("Reporte generado satisfactoriamente");
-		} catch (Exception e) {
-			return "Error :( " + e.getMessage();
-		}
+        try {
+            generarInformeDiscosEconomicos();
+            return "Reporte generado satisfactoriamente";
+        } catch (DiscoException e) {
+            return "(No se generará un reporte) " + e.getMessage();
+        }
     }
 
     /**
