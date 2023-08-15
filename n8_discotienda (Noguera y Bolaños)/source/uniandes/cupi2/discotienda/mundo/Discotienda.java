@@ -596,7 +596,7 @@ public class Discotienda
 
             // Si no se encuentran los discos entonces se lanza una excepcion
             if (!discosExistentes) {
-            	archivo.deleteOnExit();
+            	archivo.delete();
                 throw new DiscoException(" (No se generara un informe) ");
                 
             }
