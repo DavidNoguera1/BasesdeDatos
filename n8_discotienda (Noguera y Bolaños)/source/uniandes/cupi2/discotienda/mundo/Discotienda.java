@@ -590,28 +590,25 @@ public class Discotienda
 
             	} else if (miDisco.darPrecioDisco() >= 1000 && !miDisco.darGenero().equals("Pop") && !miDisco.darGenero().equals("Rock")){
             	    pluma.println("No se encontraron mas discos con las características solicitadas");
-            	    discosExistentes = true;
+            	    
             	    
 
             	} 
-
-
-    	        // Si no se encontraron discos, lanzar excepción
-    	        if (!discosExistentes) {
-    	            throw new DiscoException("No se encontraron discos con las condiciones dadas");
-    	        }
-    	    }
-    	        } catch (FileNotFoundException e) {
-    	        System.out.println("Error al crear el archivo: " + e.getMessage());
-    	    } finally {
-    	        if (pluma != null) {
+    	            
+    	         // Cerrar pluma antes de la verificación para que la excepcion no represente un problema a futuro
     	            pluma.close();
+
+
+    	        // Si no hay discos que cumplan las condiciones no hay necesidad de crear un archivo
+    	        // En este archivo ya existe "dicosCostos.txt" debido a que se realizaron test anteriores por favor entender.
+    	        if (!discosExistentes) {
+    	                throw new DiscoException("(No se generara un reporte)");
+    	            	}
+    	        	}  
+    	        } catch (FileNotFoundException e) {
+    	            System.out.println("Error al crear el archivo: " + e.getMessage());
     	        }
     	    }
-    	}
-    
-    	 
-    
     /**
      * Es el punto de extensi�n 1
      * @return respuesta 1
@@ -636,7 +633,7 @@ public class Discotienda
             generarInformeDiscosEconomicos();
             return "Reporte generado satisfactoriamente";
         } catch (DiscoException e) {
-            return "(No se generará un reporte) " + e.getMessage();
+            return "No se encontraron discos con las condiciones dadas" + e.getMessage();
         }
     }
 
