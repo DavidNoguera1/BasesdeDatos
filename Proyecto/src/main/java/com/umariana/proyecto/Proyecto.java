@@ -4,7 +4,12 @@
 
 package com.umariana.proyecto;
 import Mundo.Alumno;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 /**
@@ -29,7 +34,8 @@ public class Proyecto {
         System.out.println("2. Eliminar alumno");
         System.out.println("3. Modificar alumno");
         System.out.println("4. Consultar alumno");
-        System.out.println("5. Terminar Programa");
+        System.out.println("5. Generar reporte por semestre");
+        System.out.println("6. Terminar programa");
         System.out.println("----------------------------------");
         
         // Empleamos un switch para la seleccion de las opciones
@@ -204,6 +210,47 @@ public class Proyecto {
                     
                     
                 case 5:
+                    // Se generara un archivo el cual contenga el registro de los estudiantes de un determinado semestre
+                    System.out.println("--------Generar reporte semestre--------");
+                    System.out.println("Ingrese el semestre del cual necesite una lista");
+                    
+                    int semestreS = lector.nextInt();
+                    
+                    //Se empleara un try and catch para la generacion del archivo 
+                    try {
+                            // El archivo se va a almacenar en la carpteta data
+                            File archivo = new File ("./data/reporteEstudiantes" + semestreS + ".txt") ;
+                            
+                            PrintWriter pluma = new PrintWriter(archivo);
+                            pluma.println("Reporte de estudiantes semestre: " + semestreS);
+                            pluma.println("-----------------------");
+                            
+                            
+
+                            Iterator<Alumno> iterator = misAlumnos.iterator();
+                            while (iterator.hasNext()) {
+                                Alumno alumno = iterator.next();
+                                if (alumno.getSemestre() == semestreS) {
+                                    pluma.println("Cédula: " + alumno.getCedula() );
+                                    pluma.println("Nombre: " + alumno.getNombre() );
+                                    pluma.println("Apellido: " + alumno.getApellido() );
+                                    pluma.println("Semestre: " + alumno.getSemestre() );
+                                    pluma.println("Correo: " + alumno.getCorreo() );
+                                    pluma.println("Celular: " + alumno.getCelular() );
+                                    pluma.println("---------------------------");
+                                } 
+                            }
+
+                            pluma.close();
+                            System.out.println("Archivo generado exitosamente: reporteEstudiantes" + semestreS + ".txt");
+                        } catch (IOException e) {
+                            System.out.println("Error al generar el archivo: " + e.getMessage());
+                        }
+                 
+                    
+                    break;
+                case 6:
+                    
                     // Para finalizar el programa emplearemos el boolean (activo) previamente creado
                     System.out.println("--------Terminar Programa--------");
                     System.out.println("Esta seguro de querer terminar el programa");
@@ -222,9 +269,9 @@ public class Proyecto {
                         }  
                     System.out.println("---------------------------");
                     break;
-                default:
+                    
+            default:
                     System.out.println("Debe seleccionar una opcion del menu");
-                    break;
             }
         
         
