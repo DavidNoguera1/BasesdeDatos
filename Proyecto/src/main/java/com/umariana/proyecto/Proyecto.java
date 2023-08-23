@@ -28,16 +28,10 @@ public class Proyecto {
         ArrayList<Alumno> misAlumnos = new ArrayList<Alumno>();
         
         
-        do{
-        System.out.println("--------Menu de opeciones--------");
-        System.out.println("1. Insertar alumno");
-        System.out.println("2. Eliminar alumno");
-        System.out.println("3. Modificar alumno");
-        System.out.println("4. Consultar alumno");
-        System.out.println("5. Generar reporte por semestre");
-        System.out.println("6. Terminar programa");
-        System.out.println("----------------------------------");
+       
         
+        do{
+            mostrarMenu();
         // Empleamos un switch para la seleccion de las opciones
         int opcion = lector.nextInt();
         
@@ -275,9 +269,21 @@ public class Proyecto {
             }
         
         
-        } while (activo);
-        
-        
+        } while (activo);   
     }
+    
+    private static void mostrarMenu() {
+        
+        System.out.println("--------Menu de opeciones--------");
+        System.out.println("1. Insertar alumno");
+        System.out.println("2. Eliminar alumno");
+        System.out.println("3. Modificar alumno");
+        System.out.println("4. Consultar alumno");
+        System.out.println("5. Generar reporte por semestre");
+        System.out.println("6. Terminar programa");
+        System.out.println("----------------------------------");
+    }
+    
+    
 }
         
