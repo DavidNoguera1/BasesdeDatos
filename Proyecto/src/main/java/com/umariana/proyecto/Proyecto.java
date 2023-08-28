@@ -317,12 +317,22 @@ public class Proyecto {
         }
     }
     
+    
+    /**
+    * "cargarAlumnos "Carga los datos de los alumnos al iniciar el programa. (Restaura la persistencia)
+    * Trabaja en conjunto con "cargarAlumnos" pero este se agrega inicio del proceso
+    * @param misAlumnos La lista de alumnos cuyos datos se van leer y cargar al iniciar el programa.
+    */
+    
     private static ArrayList<Alumno> cargarAlumnos() {
         ArrayList<Alumno> misAlumnos = new ArrayList<>();
 
         try {
+            //Se define la ruta de donde se cargaran los datos de los Alumnos
             File archivo = new File("./data/alumnos.txt");
             FileReader fr = new FileReader(archivo);
+            // "lector" se encarga de leer los datos del archivo alumnos.txt
+            // Se encarga de restaurar los datos contribuyendo a mantener la persistencias
             BufferedReader lector = new BufferedReader(fr);
 
             String linea = lector.readLine();
@@ -349,7 +359,7 @@ public class Proyecto {
 
                 linea = lector.readLine();
             }
-
+               //Se cierra lector y se arroja un mensaje en caso de error al cargar los datos
                 lector.close();
                 fr.close();
          } catch (IOException e) {
@@ -359,12 +369,24 @@ public class Proyecto {
         return misAlumnos;
     }
     
+    /**
+    * "guardarAlumnos "Guarda los datos de los alumnos en un archivo para persistencia.
+    * Trabaja en conjunto con "cargarAlumnos" pero este se añade en case 1 y 6
+    * @param misAlumnos La lista de alumnos cuyos datos se van a guardar.
+    */
+    
+    
     private static void guardarAlumnos(ArrayList<Alumno> misAlumnos) {
         try {
+            
+            //Se define la ruta donde se guardaran los datos de los Alumnos
             File archivo = new File("./data/alumnos.txt");
             FileWriter fw = new FileWriter(archivo);
+            //"escritor" se encarga de registrar los datos de los alumnos
+            // y el metodo que se emplea en este caso "Filewriter" y "BufferedWriter"
             BufferedWriter escritor = new BufferedWriter(fw);
-
+            
+            // Este "for each" recorre la lista de alumnos y se guarda cada alumno en una línea del archivo
             for (Alumno alumno : misAlumnos) {
                 String linea = alumno.getCedula() + "," +
                                alumno.getNombre() + "," +
@@ -373,9 +395,10 @@ public class Proyecto {
                                alumno.getCorreo() + "," +
                                alumno.getCelular();
                 escritor.write(linea);
-                escritor.newLine();
+                escritor.newLine(); // Se agrega una nueva línea al final de cada registro
             }
-
+            
+            // Se cierra "escritor" y se lanzan mensajes de exito en el guardado o error
             escritor.close();
             fw.close();
             System.out.println("Datos de alumnos guardados exitosamente.");
