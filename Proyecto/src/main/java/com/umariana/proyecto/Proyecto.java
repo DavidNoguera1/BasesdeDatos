@@ -47,14 +47,15 @@ public class Proyecto {
                     
                 case 2:
                     
-                    eliminarAlumno(misAlumnos, lector);
                     
+                    eliminarAlumno(misAlumnos, lector);
+                    guardarAlumnos(misAlumnos);
                     break;
                     
                 case 3:
                     
                     modificarAlumno(misAlumnos, lector);
-                    
+                    guardarAlumnos(misAlumnos);
                     break;
                     
                 case 4:
