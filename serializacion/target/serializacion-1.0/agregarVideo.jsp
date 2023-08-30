@@ -17,7 +17,7 @@
         
         <form action="SvVideo" method="GET">
             
-            <label for="idVideo">idvideo:</label>
+            <label for="idVideo">idVideo:</label>
             <input type="text" name="idVideo"><br>
             
             <label for="titulo">Titulo:</label>
