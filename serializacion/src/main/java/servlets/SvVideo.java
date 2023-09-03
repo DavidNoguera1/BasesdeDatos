@@ -10,6 +10,7 @@ import javax.servlet.http.*;
 
 
 @WebServlet(name = "SvVideo", urlPatterns = {"/SvVideo"})
+
 public class SvVideo extends HttpServlet {
     ArrayList<Video> misVideos = new ArrayList<>();
     
@@ -86,7 +87,7 @@ public class SvVideo extends HttpServlet {
     }
     
     // Método para cargar los videos desde el archivo
-    private void cargarVideosDesdeArchivo(ServletContext servletContext) {
+    public void cargarVideosDesdeArchivo(ServletContext servletContext) {
         try {
             // Obtener la ruta real del archivo de datos
             String dataPath = servletContext.getRealPath("/data/videos.ser");
