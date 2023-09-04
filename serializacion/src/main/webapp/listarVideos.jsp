@@ -7,17 +7,65 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Listar videos</title>
+    <style>
+        /* Estilo para el cuerpo de la página */
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('img/fondo-geometrico-plano_23-2148967370.avif'); /* Ruta de la imagen */
+            background-size: cover; /* Escala la imagen para cubrir todo el fondo */
+            background-repeat: no-repeat; /* Evita la repetición de la imagen */
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        /* Estilo para el contenedor principal */
+        .content {
+            background-color: white;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Estilo para los títulos */
+        h1 {
+            color: #007BFF; /* Color azul */
+        }
+
+        /* Estilo para los enlaces */
+        a {
+            color: #007BFF; /* Color azul */
+            text-decoration: none;
+        }
+
+        /* Estilo para los elementos de video */
+        .video-item {
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: left;
+            background-color: white;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estilo para separar los elementos de video */
+        .video-item:not(:last-child) {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
         <h1>Listar videos</h1>
         <a href="index.jsp">Volver al inicio</a>
-        
-        
-        
-        
+
         <%
             
             ArrayList<Video> misVideos = null;
@@ -38,18 +86,22 @@
              if (misVideos != null) {
                 System.out.println("Se cargaron " + misVideos.size() + " videos exitosamente.");
                 for (Video v : misVideos) {
-                    out.print("IdVideo:" + v.getIdVideo() + "<br>");
-                    out.print("Titulo:" + v.getTitulo() + "<br>");
-                    out.print("Autor;" + v.getAutor() + "<br>");
-                    out.print("Anio:" + v.getAnio() + "<br>");
-                    out.print("Categoria:" + v.getCategoria() + "<br>");
-                    out.print("Url" + v.getUrl() + "<br>");
-                    out.print("Letra:" + v.getLetra() + "<br>");
-                    out.print("------------------------------------------------------------"+"<br>");
+        %>
+                    <div class="video-item">
+                        <strong>IdVideo:</strong> <%= v.getIdVideo() %><br>
+                        <strong>Titulo:</strong> <%= v.getTitulo() %><br>
+                        <strong>Autor:</strong> <%= v.getAutor() %><br>
+                        <strong>Año:</strong> <%= v.getAnio() %><br>
+                        <strong>Categoria:</strong> <%= v.getCategoria() %><br>
+                        <strong>Url:</strong> <%= v.getUrl() %><br>
+                        <strong>Letra:</strong> <%= v.getLetra() %><br>
+                    </div>
+        <%
                 }
             } else {
                 out.print("No hay videos disponibles.");
             }
         %>
-    </body>
+    </div>
+</body>
 </html>

@@ -11,15 +11,16 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Rockola</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Rockola</title>
+    <link rel="stylesheet" type="text/css" href="estilos.css">
     </head>
     <body>
         <h1>Sistema Reproductor de videos</h1>
         <ul>
             <li><a href="agregarVideo.jsp">Ingresar nuevo video</a></li>
             <li><a href="listarVideos.jsp">Listado de videos</a></li>
-            <li>third</li>
+            
         </ul>
         
     </body>
