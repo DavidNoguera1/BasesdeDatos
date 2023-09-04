@@ -6,7 +6,10 @@ import java.io.Serializable;
 /**
  *
  * @author David Noguera y El Bolaños
+ * Se implemento "Serializable" dado a que quermos que los datos o atributos de esta clase
+ * puedan serializarse en un futuro
  */
+
 public class Video implements Serializable {
         
     private int idVideo;

@@ -72,7 +72,10 @@
             // Obtener la ruta real del archivo de datos
             String dataPath = application.getRealPath("/data/videos.ser");
             
-            // Verificar si el archivo existe
+            // Repetimos el proceso de carga de datos porque:
+            // Si invocas directamente la página JSP de listar videos, el request no tiene el atributo que estás buscando
+            // Es nulo, de ahí que te dé ese error. @RubioRic (Stack Overflow en español)
+            
             File archivo = new File(dataPath);
             if (archivo.exists()) {
                 FileInputStream fis = new FileInputStream(dataPath);
@@ -83,6 +86,9 @@
             }
             
             // Obtener array list de la solicitud
+            // Realizamos un cambios de out.print a strong para que la interfaz se adapte mas flexiblemnte
+            // Pero respetamos la logica de Java
+            
              if (misVideos != null) {
                 System.out.println("Se cargaron " + misVideos.size() + " videos exitosamente.");
                 for (Video v : misVideos) {
