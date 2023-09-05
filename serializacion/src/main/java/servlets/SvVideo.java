@@ -28,7 +28,7 @@ public class SvVideo extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+        throws ServletException, IOException {
         // Aquí vienen los datos por doPost
         // Manda las variables pero no las muestra por motivos de seguridad
         String idVideo = request.getParameter("idVideo");
