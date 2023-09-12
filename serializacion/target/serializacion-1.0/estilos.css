@@ -9,7 +9,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css
 
 /* Estilo para el cuerpo de la página */
 body {
-   background-image: url('img/fondo-geometrico-plano_23-2148967370.avif'); /* Ruta de la imagen */
+   background-image: url('https://img.freepik.com/vector-gratis/fondo-geometrico-plano_23-2148967370.jpg'); /* Ruta de la imagen */
     background-size: cover; /* Escala la imagen para cubrir todo el fondo */
     background-repeat: no-repeat; /* Evita la repetición de la imagen */
     background-attachment: fixed; /* Fija la imagen al fondo para que no se desplace con el desplazamiento de la página */

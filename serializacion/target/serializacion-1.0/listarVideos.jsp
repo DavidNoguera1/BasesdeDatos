@@ -14,7 +14,7 @@
         /* Estilo para el cuerpo de la página */
         body {
             font-family: Arial, sans-serif;
-            background-image: url('img/fondo-geometrico-plano_23-2148967370.avif'); /* Ruta de la imagen */
+            background-image: url('https://img.freepik.com/vector-gratis/fondo-geometrico-plano_23-2148967370.jpg'); /* Ruta de la imagen */
             background-size: cover; /* Escala la imagen para cubrir todo el fondo */
             background-repeat: no-repeat; /* Evita la repetición de la imagen */
             background-attachment: fixed;
