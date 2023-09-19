@@ -10,123 +10,72 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Rockola</title>
-       <style>
-        /* Estilo para el cuerpo de la página */
-        body {
-            background-image: url('https://img.freepik.com/vector-gratis/fondo-geometrico-plano_23-2148967370.jpg'); /* Ruta de la imagen */
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            justify-content: center;
-            text-align: center;
-        }
-
-        /* Estilo para la barra de navegación */
-        ul {
-            list-style-type: none;
-            padding: 0;
-            background-color: rgba(0, 0, 0, 0.5); /* Fondo gris semitransparente */
-        }
-
-        ul li {
-            padding: 10px 0;
-        }
-
-        ul li a {
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-            font-size: 18px;
-        }
-
-        /* Estilo para el formulario */
-        form {
-            background-color: rgba(255, 255, 255, 0.7); /* Fondo blanco semitransparente */
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Sombra suave */
-            margin: 20px auto; /* Centrar en el medio de la página */
-            max-width: 400px; /* Ancho máximo del formulario */
-            display: flex;
-            flex-direction: column; /* Centrar elementos verticalmente */
-            align-items: center; /* Centrar elementos horizontalmente */
-        }
-
-        label {
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        input[type="text"],
-        textarea {
-            width: 100%;
-            padding: 5px;
-            margin-bottom: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        textarea {
-            resize: vertical;
-        }
-
-        input[type="submit"] {
-            background-color: #007BFF;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #0056b3;
-        }
-
-        a {
-            color: white;
-            font-weight: bold;
-            text-decoration: none;
-            margin-top: 10px;
-            display: inline-block;
-        }
-    </style>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        
     </head>
     <body>
         
+        <div class = "container text-center">  <!-- clase contenedora --> 
+            <h1>Sistema reproductor de videos</h1>
+            <div class = "row"  > <!-- clase division por 4 columnas -->
+                <div class = "col"  >
+                <div class = "card card-body"> <!-- targeta de trabajo -->
+                   <form action="SvVideo" method="POST">         
+            
+                    <label for="idVideo">idVideo:</label>
+                    <input type="text" name="idVideo" class = "form-control"><br>
+
+                    <label for="titulo">Titulo:</label>
+                    <input type="text" name="titulo" class = "form-control"><br>
+
+                    <label for="autor">Autor:</label>
+                    <input type="text" name="autor" class = "form-control"><br>
+
+                    <label for="anio">Año:</label>
+                    <input type="text" name="anio" class ="form-control"><br>
+
+                    <label for="url">Url:</label>
+                    <input type="text" name="url" class ="form-control"><br>
+
+                    <label for="categoria">Categoria:</label>
+                    <input type="text" name="categoria" class ="form-control"><br>
+
+                    <label for="letra">Letra:</label>
+                    <textarea id="id" name="letra" rows="5" cols="10" class ="form-control"></textarea>
+
+                    <input type="submit" value="Agregar video" class ="form-control">
+                </form>  
+                <a href="index.jsp">Volver al menu</a> 
+                </div>
+            </div>
+            
+                
+                
+            <div class = "col-md-8"  >
+                <table class="table table-bordered">
+                    <thead><!-- comment -->
+                        <tr><!-- comment -->
+                            <th> id </th>
+                            <th> Titulo </th>
+                            <th> Autor </th>
+                            <th> Acciones </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td> 1 </td>
+                            <td> No dejes que </td>
+                            <td> Caifanes </td>
+                            <td> Editar Borrar </td>
+                            
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
         
         
-        <form action="SvVideo" method="POST">         
-            
-            <label for="idVideo">idVideo:</label>
-            <input type="text" name="idVideo"><br>
-            
-            <label for="titulo">Titulo:</label>
-            <input type="text" name="titulo"><br>
-            
-            <label for="autor">Autor:</label>
-            <input type="text" name="autor"><br>
-            
-            <label for="anio">Año:</label>
-            <input type="text" name="anio"><br>
-            
-            <label for="url">Url:</label>
-            <input type="text" name="url"><br>
-            
-            <label for="categoria">Categoria:</label>
-            <input type="text" name="categoria"><br>
-            
-            <label for="letra">Letra:</label>
-            <textarea id="id" name="letra" rows="5" cols="10"></textarea>
-            
-            <input type="submit" value="Agregar video">
-        </form>  
-        <a href="index.jsp">Volver al menu</a>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        
     </body>
 </html>
