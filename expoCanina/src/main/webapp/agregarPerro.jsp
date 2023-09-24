@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <%@include file= "templates/header.jsp" %>
         
-        <!-- Agregar banner para interfaz principal -->
+        
 <!-- Empleamos una NavBar de Bootstrap para evitar interferencias de la imagen -->
 <nav class="navbar navbar-light bg-light">
   <a class="navbar-brand" href="#">
@@ -21,26 +21,26 @@
                 <div class="card card-body"> 
                     <!-- tarjeta de trabajo -->
                     <h3>Insertar nuevo perro</h3>
-                  
+                  <form action="SvPerro" method="GET">         
                       <!-- Input para el nombre-->
                     <div class="input-group mb-3">
-                      <span class="input-group-text" for="nombre">Nombre:</span>
-                      <input type="text" class="form-control" name ="nombre" >
+                      <label class="input-group-text" for="nombre">Nombre:</label>
+                      <input type="text" name ="nombre" class="form-control">
                     </div>                                            
                       <!-- Input para la raza-->
                       <div class="input-group mb-3">
-                      <span class="input-group-text" for="raza">Raza:</span>
-                      <input type="text" class="form-control" name="raza" >
+                      <label class="input-group-text" for="raza">Raza:</label>
+                      <input type="text" name="raza" class="form-control">
                     </div>
                       <!-- Input para la foto-->
                       <div class="input-group mb-3">
-                      <span class="input-group-text" for="imagen">Imagen:</span>
-                      <input type="text" class="form-control" name="imagen" >
+                      <label class="input-group-text" for="imagen">Imagen:</label>
+                      <input type="text" name="imagen" class="form-control"  >
                     </div>
                       <!-- Input para los puntos-->                   
                           <div class="input-group mb-3">
-                      <span class="input-group-text" for="puntos">Puntos:</span>
-                        <select class="form-select" name="puntos" >
+                      <label class="input-group-text" for="puntos">Puntos:</label>
+                        <select name="puntos" class="form-select" >
                           <option selected>Selecione...</option>
                           <option value="1">1</option>
                           <option value="2">2</option>
@@ -56,13 +56,15 @@
                        </div>
                       <!-- Input para la edad-->
                       <div class="input-group mb-3">
-                      <span class="input-group-text" for="edad">Edad:</span>
-                      <input type="text" class="form-control"  name="edad" >
+                      <label class="input-group-text" for="edad">Edad:</label>
+                      <input type="text" name="edad"  class="form-control"   >
                     </div>
+                      <!-- Boton para agregar perros --> 
+                      <input type="submit" value="Agregar perro" class ="form-control"</>
                 </form><br>
-                <!-- boton de agregar el perrito --> 
-                <button type="button" class="btn btn-success">Agregar perro</button>
-                <a href="index.jsp">Volver al Index</a> 
+                
+                
+                <a href="index.jsp">Volver al Menu</a> 
                 </div>    
             </div> 
                 <!-- Tabla de datos -->
