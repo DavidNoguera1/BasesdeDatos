@@ -4,7 +4,11 @@
     Author     : Sistemas (Grupo Portilla, Noguera y Bolaños)
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.umariana.mundo.ExposicionPerros"%>
+<%@page import="com.umariana.mundo.Perro"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <%@include file= "templates/header.jsp" %>
         
@@ -21,7 +25,7 @@
                 <div class="card card-body"> 
                     <!-- tarjeta de trabajo -->
                     <h3>Insertar nuevo perro</h3>
-                  <form action="SvPerro" method="GET">         
+                  <form action="SvPerro" method="POST">         
                       <!-- Input para el nombre-->
                     <div class="input-group mb-3">
                       <label class="input-group-text" for="nombre">Nombre:</label>
@@ -68,6 +72,8 @@
                 </div>    
             </div> 
                 <!-- Tabla de datos -->
+                
+                
             <div class="col-md-8">
                     <table class="table table-bordered">
                     <thead>
@@ -81,20 +87,34 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Pistacho </td>
-                            <td>Pequinez</td>
-                            <td>ft</td>
-                            <td>5</td>
-                            <td>20</td>
-                            <td>xd</td>
-                        </tr>
+                         <%
+                              // Obtener array list de la solicitud utilizando el método cargarPerros
+                                ServletContext context = request.getServletContext();
+                                ArrayList<Perro> darPerros = ExposicionPerros.cargarPerros(context);
+
+                                // Recorrido de la lista y asignacion de los datos en las casillas
+                                if (darPerros != null) {
+                                    for (Perro perro : darPerros) {
+                            %>
+                            <tr>
+                                <td><%= perro.getNombre() %></td>
+                                <td><%= perro.getRaza() %></td>
+                                <td><%= perro.getImagen() %></td>
+                                <td><%= perro.getPuntos() %></td>
+                                <td><%= perro.getEdad() %></td>
+                                <td>Editar</td>
+                                
+                            </tr>
+                            <%
+                                }
+                                }
+                            %>
                     </tbody> 
                 </table>
                 </div>
                </div>  
             </div>    
-        </div>
+        
 
         
         
