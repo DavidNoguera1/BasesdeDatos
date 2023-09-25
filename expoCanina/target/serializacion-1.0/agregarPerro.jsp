@@ -75,7 +75,7 @@
                 
                 
             <div class="col-md-8">
-                    <table class="table table-bordered">
+                    <table class="table table-bordered table-dark">
                     <thead>
                         <tr>
                             <th>Nombre</th>

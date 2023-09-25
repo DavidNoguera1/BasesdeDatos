@@ -1,32 +1,29 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.umariana.mundo;
+
 import com.umariana.mundo.Perro;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.ArrayList;
 import javax.servlet.ServletContext;
 
-/**
- *
- * @author Sistemas
- */
 public class ExposicionPerros {
     
-    ArrayList<Perro> darPerros = new ArrayList<>();
+    // Creamos la lista darPerros y la definimos 
+    // La definimos como "sttatic" para que este disponible en el todo el programa
+    private static ArrayList<Perro> darPerros = new ArrayList<>();
     
-         // Método para guardar la lista de perros en un archivo perros.ser
-    public static void guardarPerro(ArrayList<Perro> darPerros) {
+    // Método para guardar la lista de perros en un archivo perros.ser
+    public static void guardarPerro(ArrayList<Perro> perros, ServletContext context) throws IOException {
+        
+        //Definimos una ruta para buscar nuestro archivo perro.ser
+        String relativePath = "/data/perros.ser";
+        String absPath = context.getRealPath(relativePath);
+        File archivo = new File(absPath);
+        
         try {
             // Crear un archivo para guardar la lista de perros serializada
-            FileOutputStream fos = new FileOutputStream("perros.ser");
+            FileOutputStream fos = new FileOutputStream(archivo);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(darPerros);
+            oos.writeObject(perros);
             oos.close();
             System.out.println("Datos de perros guardados exitosamente en: perros.ser");
         } catch (IOException e) {
@@ -36,11 +33,16 @@ public class ExposicionPerros {
     }
 
     // Método para cargar los perros desde el archivo deserializándolo
-    public static ArrayList<Perro> cargarPerros(ServletContext servletContext) {
-        ArrayList<Perro> darPerros = new ArrayList<>();
+    public static ArrayList<Perro> cargarPerros(ServletContext context) throws IOException, ClassNotFoundException {
+        
+        //Reutilizamos la ruta previamente definida para perro.ser
+        String relativePath = "/data/perros.ser";
+        String absPath = context.getRealPath(relativePath);
+        File archivo = new File(absPath);
+        
         try {
             // Cargar la lista de perros desde el archivo
-            FileInputStream fis = new FileInputStream("perros.ser");
+            FileInputStream fis = new FileInputStream(archivo);
             ObjectInputStream ois = new ObjectInputStream(fis);
             darPerros = (ArrayList<Perro>) ois.readObject();
             ois.close();
@@ -51,5 +53,5 @@ public class ExposicionPerros {
         }
         return darPerros;
     }
-    
 }
+
