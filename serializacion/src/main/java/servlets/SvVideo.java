@@ -3,6 +3,8 @@ package servlets;
 import com.umariana.mundo.Video;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,8 +22,14 @@ public class SvVideo extends HttpServlet {
         // Obtener el ServletContext correctamente
         ServletContext servletContext = getServletContext();
 
-        // Cargar los videos serializados al iniciar la aplicación
-        misVideos = Video.cargarVideosDesdeArchivo(servletContext);
+        try {
+            // Cargar los videos serializados al iniciar la aplicación
+            misVideos = Video.cargarVideosDesdeArchivo(servletContext);
+        } catch (IOException ex) {
+            Logger.getLogger(SvVideo.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(SvVideo.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -37,8 +45,8 @@ public class SvVideo extends HttpServlet {
         String categoria = request.getParameter("categoria");
         String letra = request.getParameter("letra");   
 
-        //Añadimos un try n catch donde realizamos un paseInt a la ID
-        //Tambien hay una excepcion en caso de errores
+        //Añadimos un try n catch donde realizamos un parseInt a la ID
+        //También hay una excepción en caso de errores
         try {
             int idVideoInt = Integer.parseInt(idVideo);
             // Ingresar datos al objeto
@@ -51,7 +59,7 @@ public class SvVideo extends HttpServlet {
         }
 
         // Guardar la lista de videos en un archivo .ser
-        Video.guardarVideosEnArchivo(misVideos);
+        Video.guardarVideosEnArchivo(misVideos, getServletContext());
 
         // Agregar el ArrayList al objeto de solicitud
         request.setAttribute("misVideos", misVideos);

@@ -1,6 +1,6 @@
-
 package com.umariana.mundo;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -9,13 +9,6 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import javax.servlet.ServletContext;
-
-/**
- *
- * @author David Noguera y El Bolaños
- * Se implemento "Serializable" dado a que quermos que los datos o atributos de esta clase
- * puedan serializarse en un futuro
- */
 
 public class Video implements Serializable {
         
@@ -96,13 +89,17 @@ public class Video implements Serializable {
         this.letra = letra;
     }
     
-     // Método para guardar la lista de videos en un archivo videos.ser
-    public static void guardarVideosEnArchivo(ArrayList<Video> listaDeVideos) {
+    // Método para guardar la lista de videos en un archivo videos.ser
+    public static void guardarVideosEnArchivo(ArrayList<Video> videos, ServletContext context) throws IOException {
+        String relativePath = "/data/videos.ser";
+        String absPath = context.getRealPath(relativePath);
+        File archivo = new File(absPath);
+        
         try {
             // Crear un archivo para guardar la lista de videos serializada
-            FileOutputStream fos = new FileOutputStream("videos.ser");
+            FileOutputStream fos = new FileOutputStream(archivo);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-            oos.writeObject(listaDeVideos);
+            oos.writeObject(videos);
             oos.close();
             System.out.println("Datos de videos guardados exitosamente en: videos.ser");
         } catch (IOException e) {
@@ -112,11 +109,15 @@ public class Video implements Serializable {
     }
 
     // Método para cargar los videos desde el archivo deserializándolo
-    public static ArrayList<Video> cargarVideosDesdeArchivo(ServletContext servletContext) {
+    public static ArrayList<Video> cargarVideosDesdeArchivo(ServletContext context) throws IOException, ClassNotFoundException {
         ArrayList<Video> listaDeVideos = new ArrayList<>();
+        
+        String relativePath = "/data/videos.ser";
+        String absPath = context.getRealPath(relativePath);
+        File archivo = new File(absPath);
         try {
             // Cargar la lista de videos desde el archivo
-            FileInputStream fis = new FileInputStream("videos.ser");
+            FileInputStream fis = new FileInputStream(archivo);
             ObjectInputStream ois = new ObjectInputStream(fis);
             listaDeVideos = (ArrayList<Video>) ois.readObject();
             ois.close();
@@ -127,6 +128,5 @@ public class Video implements Serializable {
         }
         return listaDeVideos;
     }
-    
 }
 
