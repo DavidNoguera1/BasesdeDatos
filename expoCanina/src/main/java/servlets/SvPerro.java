@@ -58,7 +58,7 @@ public class SvPerro extends HttpServlet {
         // Obtener los parámetros del formulario
         String nombre = request.getParameter("nombre");
         String raza = request.getParameter("raza");
-        String imagen = request.getParameter(fileName);
+        String imagen = fileName;
         String puntosStr = request.getParameter("puntos");
         String edadStr = request.getParameter("edad");
         
